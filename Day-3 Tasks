@@ -1,0 +1,209 @@
+1. Bank Account :
+
+import java.util.Scanner;
+
+class BankAccount {
+    String name;
+    double balance;
+
+    BankAccount(String name, double balance) {
+        this.name = name;
+        this.balance = balance;
+    }
+
+    void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: " + amount);
+    }
+
+    void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount);
+        } else {
+            System.out.println("Insufficient balance");
+        }
+    }
+
+    void display() {
+        System.out.println("Name: " + name + ", Balance: " + balance);
+    }
+}
+
+public class BankApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        BankAccount acc = new BankAccount("John", 1000);
+
+        acc.display();
+        acc.deposit(500);
+        acc.withdraw(200);
+        acc.withdraw(2000);
+        acc.display();
+    }
+}
+
+
+2.Employee class with salary calculation :
+
+class Person {
+    String name;
+    int age;
+
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Employee extends Person {
+    double basic;
+
+    Employee(String name, int age, double basic) {
+        super(name, age);
+        this.basic = basic;
+    }
+
+    double calculateSalary() {
+        return basic + (0.2 * basic) + (0.1 * basic);
+    }
+
+    void display() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Total Salary: " + calculateSalary());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Employee e = new Employee("Alice", 30, 30000);
+        e.display();
+    }
+}
+
+
+3. Overloading:
+
+public class OverloadDemo {
+    int sum(int a, int b) {
+        return a + b;
+    }
+
+    double sum(double a, double b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        OverloadDemo obj = new OverloadDemo();
+        System.out.println("Sum (int): " + obj.sum(10, 20));
+        System.out.println("Sum (double): " + obj.sum(10.7, 20.9));
+    }
+}
+
+
+4.Student Management System:
+
+import java.util.Scanner;
+
+class Student {
+    String name;
+    int roll;
+    int marks;
+
+    void setDetails(String name, int roll, int marks) {
+        this.name = name;
+        this.roll = roll;
+        this.marks = marks;
+    }
+
+    void display() {
+        System.out.println("Name: " + name);
+        System.out.println("Roll: " + roll);
+        System.out.println("Marks: " + marks);
+        if (marks >= 50)
+            System.out.println("Result: Pass");
+        else
+            System.out.println("Result: Fail");
+    }
+}
+
+public class StudentSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Student s = new Student();
+        System.out.print("Enter name: ");
+        String name = sc.nextLine();
+        System.out.print("Enter roll: ");
+        int roll = sc.nextInt();
+        System.out.print("Enter marks: ");
+        int marks = sc.nextInt();
+        s.setDetails(name, roll, marks);
+        s.display();
+    }
+}
+
+
+5. Library class system:
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Library {
+    ArrayList<String> books = new ArrayList<>();
+
+    void addBook(String book) {
+        books.add(book);
+        System.out.println(book + " added");
+    }
+
+    void removeBook(String book) {
+        if (books.remove(book))
+            System.out.println(book + " removed");
+        else
+            System.out.println(book + " not found");
+    }
+
+    void issueBook(String book) {
+        if (books.contains(book)) {
+            books.remove(book);
+            System.out.println(book + " issued");
+        } else {
+            System.out.println(book + " not available");
+        }
+    }
+
+    void showBooks() {
+        System.out.println("Books in library:");
+        for (String book : books)
+            System.out.println(book);
+    }
+}
+
+public class LibrarySystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Library lib = new Library();
+        while (true) {
+            System.out.println("1.Add 2.Remove 3.Issue 4.Show 5.Exit");
+            int ch = sc.nextInt();
+            sc.nextLine();
+            if (ch == 5) break;
+            if (ch >= 1 && ch <= 3) {
+                System.out.print("Enter book name: ");
+                String book = sc.nextLine();
+                if (ch == 1) lib.addBook(book);
+                else if (ch == 2) lib.removeBook(book);
+                else lib.issueBook(book);
+            } else if (ch == 4) {
+                lib.showBooks();
+            } else {
+                System.out.println("Invalid choice");
+            }
+        }
+    }
+}
+
+
+
+
