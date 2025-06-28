@@ -1,0 +1,150 @@
+1. ArrayList of students:
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
+class Student {
+    String name;
+    int roll;
+
+    Student(String name, int roll) {
+        this.name = name;
+        this.roll = roll;
+    }
+
+    void display() {
+        System.out.println("Name: " + name + ", Roll: " + roll);
+    }
+}
+
+public class StudentList {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Student> list = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            System.out.print("Enter name: ");
+            String name = sc.nextLine();
+            System.out.print("Enter roll: ");
+            int roll = sc.nextInt();
+            sc.nextLine();
+            list.add(new Student(name, roll));
+        }
+
+        System.out.println("\nStudent List:");
+        Iterator<Student> it = list.iterator();
+        while (it.hasNext()) {
+            it.next().display();
+        }
+    }
+}
+
+
+2. HashSet to store a list of unique email addresses:
+
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class UniqueEmails {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        HashSet<String> emails = new HashSet<>();
+
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Enter email: ");
+            String email = sc.nextLine();
+            emails.add(email);
+        }
+
+        System.out.println("\nUnique Emails:");
+        for (String email : emails) {
+            System.out.println(email);
+        }
+    }
+}
+
+
+3. HashMap to store student name → marks, and compute average:
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class StudentMarks {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        HashMap<String, Integer> map = new HashMap<>();
+        int total = 0;
+
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Enter name: ");
+            String name = sc.nextLine();
+            System.out.print("Enter marks: ");
+            int marks = sc.nextInt();
+            sc.nextLine();
+            map.put(name, marks);
+            total += marks;
+        }
+
+        System.out.println("\nStudent Marks:");
+        for (String name : map.keySet()) {
+            System.out.println(name + ": " + map.get(name));
+        }
+
+        double avg = (double) total / map.size();
+        System.out.println("Average Marks: " + avg);
+    }
+}
+
+
+4. Student Course Enrollment System:
+
+import java.util.*;
+
+public class EnrollmentSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> students = new ArrayList<>();
+        HashMap<String, ArrayList<String>> courses = new HashMap<>();
+
+        while (true) {
+            System.out.println("1.Add 2.Remove 3.Display 4.Exit");
+            int ch = sc.nextInt();
+            sc.nextLine();
+
+            if (ch == 1) {
+                System.out.print("Enter student name: ");
+                String name = sc.nextLine();
+                students.add(name);
+                ArrayList<String> list = new ArrayList<>();
+                System.out.print("Enter number of courses: ");
+                int n = sc.nextInt();
+                sc.nextLine();
+                for (int i = 0; i < n; i++) {
+                    System.out.print("Course " + (i + 1) + ": ");
+                    list.add(sc.nextLine());
+                }
+                courses.put(name, list);
+            } else if (ch == 2) {
+                System.out.print("Enter student name to remove: ");
+                String name = sc.nextLine();
+                students.remove(name);
+                courses.remove(name);
+            } else if (ch == 3) {
+                Iterator<String> it = students.iterator();
+                while (it.hasNext()) {
+                    String name = it.next();
+                    System.out.println(name + ": " + courses.get(name));
+                }
+            } else if (ch == 4) {
+                break;
+            }
+        }
+    }
+}
+
+
+
+
+
+
