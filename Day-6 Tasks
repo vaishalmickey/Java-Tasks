@@ -1,1 +1,112 @@
+1. Print numbers 1–10	
+
+class CountThread extends Thread {
+    CountThread(String name) {
+        super(name);
+    }
+
+    public void run() {
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(getName() + ": " + i);
+            try { Thread.sleep(100); } catch (Exception e) {}
+        }
+    }
+
+    public static void main(String[] args) {
+        CountThread t = new CountThread("Counter");
+        t.start();
+    }
+}
+
+2. Runnable with constructor message and thread name
+
+class MyTask implements Runnable {
+    public void run() {
+        System.out.println("Thread is running");
+    }
+
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new MyTask());
+        Thread t2 = new Thread(new MyTask());
+        t1.start();
+        t2.start();
+    }
+}
+
+
+3.  Delay thread output
+
+class SleepDemo extends Thread {
+    public void run() {
+        for (int i = 1; i <= 3; i++) {
+            System.out.println(getName() + " - Count: " + i);
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        SleepDemo t1 = new SleepDemo();
+        SleepDemo t2 = new SleepDemo();
+        t1.start();
+        t2.start();
+    }
+}
+
+4. Ticket Booking Simulation
+
+class TicketCounter {
+    int seats = 5;
+
+    synchronized void bookTicket(String name, int wanted) {
+        System.out.println(name + " is trying to book " + wanted + " seat(s)");
+        try {
+            Thread.sleep(500);
+        } catch (Exception e) {}
+
+        if (seats >= wanted) {
+            seats -= wanted;
+            System.out.println(name + " booked " + wanted + " seat(s). Seats left: " + seats);
+        } else {
+            System.out.println("Sorry " + name + ", not enough seats available. Seats left: " + seats);
+        }
+    }
+}
+
+class User extends Thread {
+    TicketCounter counter;
+    String userName;
+    int seatsToBook;
+
+    User(TicketCounter counter, String userName, int seatsToBook) {
+        this.counter = counter;
+        this.userName = userName;
+        this.seatsToBook = seatsToBook;
+    }
+
+    public void run() {
+        counter.bookTicket(userName, seatsToBook);
+    }
+}
+
+public class BookingApp {
+    public static void main(String[] args) {
+        TicketCounter counter = new TicketCounter();
+
+        User u1 = new User(counter, "Alice", 2);
+        User u2 = new User(counter, "Bob", 3);
+        User u3 = new User(counter, "Charlie", 1);
+
+        u1.start();
+        u2.start();
+        u3.start();
+    }
+}
+
+
+
+
 
