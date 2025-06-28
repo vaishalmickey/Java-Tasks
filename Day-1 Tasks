@@ -1,0 +1,112 @@
+1. Even numbers from 1-100:
+
+public class EvenNumbers {
+    public static void main(String[] args) {
+        System.out.println("Even numbers from 1 to 100:");
+
+        for (int i = 1; i <= 100; i++) {
+            if (i % 2 == 0) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+}
+
+
+
+2.Simple interest calculator:
+
+public class SimpleInterestCalculator {
+    public static void main(String[] args) {
+        double principal = 10000;
+        double rate = 5;
+        double time = 2;
+        double interest = 0;
+
+        if (principal > 0 && rate > 0 && time > 0) {
+            interest = (principal * rate * time) / 100;
+            System.out.println("Simple Interest: " + interest);
+        } else {
+            System.out.println("Invalid input values");
+        }
+    }
+}
+
+
+
+
+3. Leap year:
+
+public class LeapYearChecker {
+    public static void main(String[] args) {
+        int year = 2024;
+
+        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+            System.out.println(year + " is a leap year.");
+        } else {
+            System.out.println(year + " is not a leap year.");
+        }
+    }
+}
+
+
+
+4. Simple calculator:
+
+import java.util.Scanner;
+
+public class SimpleCalculator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int ch;
+        double a, b;
+
+        while (true) {
+            System.out.println("1.Add  2.Sub  3.Mul  4.Div  5.Exit");
+            ch = sc.nextInt();
+
+            if (ch == 5) break;
+
+            System.out.print("Enter two numbers: ");
+            a = sc.nextDouble();
+            b = sc.nextDouble();
+
+            if (ch == 1)
+                System.out.println("Result: " + (a + b));
+            else if (ch == 2)
+                System.out.println("Result: " + (a - b));
+            else if (ch == 3)
+                System.out.println("Result: " + (a * b));
+            else if (ch == 4)
+                System.out.println(b != 0 ? "Result: " + (a / b) : "Cannot divide by zero");
+            else
+                System.out.println("Invalid choice");
+        }
+    }
+}
+
+
+
+5. Student result:
+
+import java.util.Scanner;
+
+public class StudentResult {
+    static String getGrade(int marks) {
+        if (marks >= 90) return "A";
+        else if (marks >= 80) return "B";
+        else if (marks >= 70) return "C";
+        else if (marks >= 60) return "D";
+        else return "F";
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter marks: ");
+        int marks = sc.nextInt();
+        String grade = getGrade(marks);
+        System.out.println("Grade: " + grade);
+    }
+}
+
+
