@@ -1,0 +1,156 @@
+1. Dividing by zero:
+
+public class DivideByZero {
+    public static void main(String[] args) {
+        try {
+            int a = 10;
+            int b = 0;
+            int result = a / b;
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+2. Reading a file : 
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class ReadFile {
+    public static void main(String[] args) {
+        try (BufferedReader br = new BufferedReader(new FileReader("input.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+
+3.Writing a file :
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WriteFile {
+    public static void main(String[] args) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("output.txt"))) {
+            bw.write("Line 1");
+            bw.newLine();
+            bw.write("Line 2");
+            bw.newLine();
+            bw.write("Line 3");
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+4. Result processing :
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class ResultProcessing {
+    public static void main(String[] args) {
+        try (BufferedReader br = new BufferedReader(new FileReader("marks.txt"));
+             BufferedWriter bw = new BufferedWriter(new FileWriter("result.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                String name = parts[0];
+                int marks = Integer.parseInt(parts[1]);
+                String result = marks >= 50 ? "Pass" : "Fail";
+                bw.write(name + ": " + result);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+5. Employee record system :
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class EmployeeRecordSystem {
+    private static final String FILE_NAME = "employees.txt";
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("1. Create");
+            System.out.println("2. Read");
+            System.out.println("3. Update");
+            System.out.println("4. Delete");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
+            int option = scanner.nextInt();
+            scanner.nextLine(); // Consume newline left-over
+
+            switch (option) {
+                case 1:
+                    createEmployee();
+                    break;
+                case 2:
+                    readEmployees();
+                    break;
+                case 3:
+                    updateEmployee();
+                    break;
+                case 4:
+                    deleteEmployee();
+                    break;
+                case 5:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid option");
+            }
+        }
+    }
+
+    private static void createEmployee() {
+        System.out.print("Enter employee ID: ");
+        String id = scanner.nextLine();
+        System.out.print("Enter employee name: ");
+        String name = scanner.nextLine();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
+            bw.write(id + "," + name);
+            bw.newLine();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private static void readEmployees() {
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private static void updateEmployee() {
+        System.out.print("Enter employee ID: ");
+        String id = scanner.nextLine();
+        System.out.print("Enter new
